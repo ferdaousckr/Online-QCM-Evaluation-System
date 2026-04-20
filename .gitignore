@@ -1,0 +1,18 @@
+# --- Client (React/Vite) ---
+/client/node_modules
+/client/dist
+/client/.env
+
+# --- Server (Laravel) ---
+/server/vendor
+/server/.env
+/server/storage/*.log
+/server/storage/framework/cache/*
+/server/storage/framework/sessions/*
+/server/storage/framework/views/*
+
+# --- Divers / Système ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
