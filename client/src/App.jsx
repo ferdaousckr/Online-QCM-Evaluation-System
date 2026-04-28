@@ -1,10 +1,8 @@
-import LoginView from './components/LoginView'; // Assure-toi que le chemin est bon
+import ProfessorDashboard from './components/ProfessorDashboard';
 
 function App() {
   return (
-    <div className="App">
-      <LoginView />
-    </div>
+    <ProfessorDashboard />
   );
 }
 
