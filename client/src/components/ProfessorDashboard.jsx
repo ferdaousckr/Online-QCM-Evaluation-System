@@ -1,8 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Importation nécessaire
 import { Plus, LogOut, Eye, Edit2, Trash2, Copy, Clock, Users } from 'lucide-react';
 import './dashboard.css';
 
 const ProfessorDashboard = () => {
+  const navigate = useNavigate(); // 2. Initialisation du hook
+
+  // 3. Fonction de déconnexion
+  const handleLogout = () => {
+    navigate('/');
+  };
+
   const quizzes = [
     { id: 1, title: "Quiz de Mathématiques", code: "ABC123", questions: 15, duration: 30, completed: 24, average: 78, date: "01/04/2026" },
     { id: 2, title: "Quiz de Physique", code: "XYZ789", questions: 20, duration: 45, completed: 28, average: 72, date: "28/03/2026" },
@@ -13,7 +21,8 @@ const ProfessorDashboard = () => {
     <div className="dashboard-container">
       <nav className="dashboard-nav">
         <h1 style={{fontSize: '1.25rem', fontWeight: 800, color: '#1e293b'}}>Tableau de Bord Professeur</h1>
-        <button className="logout-btn">
+        {/* 4. Ajout de l'événement onClick */}
+        <button className="logout-btn" onClick={handleLogout}>
           <LogOut size={18} /> Déconnexion
         </button>
       </nav>
