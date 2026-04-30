@@ -1,12 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Importation nécessaire
+import { useNavigate } from 'react-router-dom'; 
 import { Plus, LogOut, Eye, Edit2, Trash2, Copy, Clock, Users } from 'lucide-react';
 import './dashboard.css';
 
 const ProfessorDashboard = () => {
-  const navigate = useNavigate(); // 2. Initialisation du hook
+  const navigate = useNavigate(); 
 
-  // 3. Fonction de déconnexion
+  
   const handleLogout = () => {
     navigate('/');
   };
@@ -33,7 +33,8 @@ const ProfessorDashboard = () => {
             <h2 style={{fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.25rem'}}>Gestion des Quiz</h2>
             <p style={{color: '#64748b'}}>Créez et gérez vos quiz pour vos étudiants</p>
           </div>
-          <button className="new-quiz-btn">
+          {/* Change the button below to include the onClick event */}
+          <button className="new-quiz-btn" onClick={() => navigate('/create-quiz')}>
             <Plus size={20} /> Nouveau Quiz
           </button>
         </div>
