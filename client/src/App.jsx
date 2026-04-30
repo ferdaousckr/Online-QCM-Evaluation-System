@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginView from './components/LoginView';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import CreateQuiz from './components/CreateQuiz';
+import StudentDashboard from './components/StudentDashboard'; 
+import QuizView from './components/QuizView'; 
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         
         {/* Route for the create quiz page */}
         <Route path="/create-quiz" element={<CreateQuiz />} />
+        <Route path="/student-dashboard" element={<StudentDashboard />} />
+        <Route path="/student/quiz/:id" element={<QuizView />} />
       </Routes>
     </BrowserRouter>
   );

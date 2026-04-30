@@ -12,8 +12,7 @@ const LoginView = () => {
     if (userType === 'professeur') {
       navigate('/prof-dashboard');
     } else {
-      alert("Le dashboard étudiant est en cours de développement !");
-      // Plus tard, tu ajouteras : navigate('/student-dashboard');
+      navigate('/student-dashboard');
     }
   };
 
