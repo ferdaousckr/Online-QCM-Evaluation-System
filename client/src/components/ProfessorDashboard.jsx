@@ -45,8 +45,8 @@ const ProfessorDashboard = () => {
               <div className="card-header">
                 <h3 style={{fontWeight: 700, fontSize: '1.1rem'}}>{quiz.title}</h3>
                 <div className="action-icons">
-                  <button className="icon-btn" style={{color: '#3b82f6'}}><Eye size={18}/></button>
-                  <button className="icon-btn" style={{color: '#94a3b8'}}><Edit2 size={18}/></button>
+                  <button className="icon-btn" style={{color: '#3b82f6'}} onClick={() => navigate(`/quiz/${quiz.id}`)}><Eye size={18}/></button>
+                  <button className="icon-btn" style={{color: '#94a3b8'}} onClick={() => navigate('/create-quiz')}><Edit2 size={18}/></button>
                   <button className="icon-btn" style={{color: '#ef4444'}}><Trash2 size={18}/></button>
                 </div>
               </div>

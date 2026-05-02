@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginView from './components/LoginView';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import CreateQuiz from './components/CreateQuiz';
+import QuizPreview from './components/QuizPreview';
 
 function App() {
   return (
@@ -12,9 +13,11 @@ function App() {
         
         {/* Route for the Professor Dashboard */}
         <Route path="/prof-dashboard" element={<ProfessorDashboard />} />
-        
-        {/* Route for the create quiz page */}
+      
         <Route path="/create-quiz" element={<CreateQuiz />} />
+      
+        <Route path="/quiz/:id" element={<QuizPreview />} />
+      
       </Routes>
     </BrowserRouter>
   );

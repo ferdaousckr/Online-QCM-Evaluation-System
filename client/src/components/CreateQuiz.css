@@ -21,7 +21,7 @@
   gap: 6px;
   background: none;
   border: none;
-  color: #64748b; /* Grey sub-text color from dashboard */
+  color: #64748b; 
   cursor: pointer;
   font-size: 0.875rem; /* 14px */
   font-weight: 500;
@@ -35,7 +35,7 @@
 }
 
 .create-quiz-header h1 {
-  font-size: 1.5rem; /* Matches "Gestion des Quiz" size */
+  font-size: 1.5rem; 
   font-weight: 700;
   color: #1e293b;
   margin: 0;
@@ -62,10 +62,13 @@
 
 .quiz-card h2, 
 .quiz-card h3 {
-  font-size: 1.125rem; /* Matches "Quiz de Mathématiques" */
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 1.125rem; 
+  font-weight: 800;    
+  color: #1e293b;     
   margin-bottom: 24px;
+  display: flex;      
+  align-items: center;
+  gap: 8px;
 }
 
 /* Form Groups */
@@ -73,13 +76,24 @@
   margin-bottom: 24px;
 }
 
+.options-section label {
+  font-size: 0.875rem ;
+  font-weight: 800 ; 
+  color: #334155 ;  
+  margin-bottom: 16px ;
+  display: flex ;
+  align-items: center ;
+  gap: 8px ;
+  font-family: 'Inter', sans-serif ;
+}
+
 .input-group label {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.875rem; /* Matches dashboard stat labels */
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 0.875rem; 
+  font-weight: 800;
+  margin-bottom: 16px;
   color: #334155;
 }
 
@@ -97,15 +111,15 @@
 .input-group input:focus, 
 .input-group textarea:focus {
   outline: none;
-  border-color: #6366f1; /* Purple-ish glow to match your buttons */
+  border-color: #6366f1; 
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 /* Helper & Small Text */
 .helper-text {
-  font-size: 0.8125rem; /* 13px */
+  font-size: 0.85rem; 
   color: #64748b;
-  margin-top: 6px;
+  margin-top: 12px;
 }
 
 .italic { 
@@ -114,9 +128,9 @@
 
 /* Options Section */
 .options-section {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px dashed #e2e8f0;
+  margin-top: 10px;
+  padding-top: 0;
+  border-top: none;
 }
 
 .option-row {
@@ -126,11 +140,23 @@
   margin-bottom: 12px;
 }
 
+.option-row input[type="text"] {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px; 
+  font-size: 0.9rem;
+  color: #1e293b;
+  background-color: transparent;
+}
+
 .correct-checkbox {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
   accent-color: #6366f1;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 4px;
 }
 
 /* Action Footer */
@@ -164,7 +190,7 @@
 
 .submit-quiz-btn {
   flex: 2;
-  background: #6366f1; /* Matches the "+ Nouveau Quiz" Button color */
+  background: #6366f1; 
   color: white;
   border: none;
   border-radius: 10px;
