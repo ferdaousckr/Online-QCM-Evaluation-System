@@ -12,11 +12,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/quizzes', [QuizController::class, 'store']);
-Route::post('/questions', [QuestionController::class, 'store']);
 Route::put('/quizzes/{id}', [QuizController::class, 'update']);
-Route::put('/questions/{id}', [QuestionController::class, 'update']);
 Route::delete('/quizzes/{id}', [QuizController::class, 'destroy']);
+Route::post('/questions', [QuestionController::class, 'store']);
+Route::put('/questions/{id}', [QuestionController::class, 'update']);
 Route::delete('/questions/{id}', [QuestionController::class, 'destroy']);
+Route::get('/quizzes', [QuizController::class, 'index']);
+Route::get('/quizzes/{id}', [QuizController::class, 'show']);
+
 
 use App\Http\Controllers\AuthController;
 

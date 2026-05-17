@@ -18,7 +18,7 @@ function App() {
         <Route path="/prof-dashboard" element={<ProfessorDashboard />} />
       
         <Route path="/create-quiz" element={<CreateQuiz />} />
-
+        <Route path="/edit-quiz/:id" element={<CreateQuiz />} />
       
         <Route path="/quiz/:id" element={<QuizPreview />} />
       

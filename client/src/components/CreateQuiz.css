@@ -204,3 +204,33 @@
 .submit-quiz-btn:hover {
   opacity: 0.9;
 }
+
+.question-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.question-header h3 {
+  margin-bottom: 0 !important; 
+}
+
+.delete-question-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.delete-question-btn:hover {
+  color: #ef4444; 
+  background-color: #fee2e2; 
+}
