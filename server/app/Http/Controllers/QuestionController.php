@@ -13,6 +13,7 @@ class QuestionController extends Controller
         $question = Question::create([
             'quiz_id' => $request->quiz_id, // L'ID du quiz qu'on vient de créer
             'question_text' => $request->question_text,
+            'time' => $request->time ?? 30,
             'options' => $request->options, // Ce sera un tableau (A, B, C, D)
             'correct_answer' => $request->correct_answer,
         ]);
@@ -32,6 +33,7 @@ class QuestionController extends Controller
 
     $question->update([
         'question_text' => $request->question_text,
+        'time' => $request->time ?? $question->time,
         'options' => $request->options,
         'correct_answer' => $request->correct_answer,
     ]);

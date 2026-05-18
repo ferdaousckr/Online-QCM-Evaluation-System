@@ -42,6 +42,7 @@ class QuizController extends Controller
             foreach ($request->questions as $q) {
                 $quiz->questions()->create([
                     'question_text' => $q['question_text'] ?? '',
+                    'time' => $q['time'] ?? 30,
                     'options' => $q['options'] ?? [], 
                     'correct_answer' => $q['correct_answer'] ?? [],
                 ]);
@@ -76,6 +77,7 @@ class QuizController extends Controller
             foreach ($request->questions as $q) {
                 $quiz->questions()->create([
                     'question_text' => $q['question_text'] ?? '',
+                    'time' => $q['time'] ?? 30,
                     'options' => $q['options'] ?? [],
                     'correct_answer' => $q['correct_answer'] ?? [],
                 ]);

@@ -74,6 +74,7 @@ const CreateQuiz = () => {
       user_id: null,
       questions: questions.map(q => ({
          question_text: q.text,
+         time: q.time,
          options: q.options,
          correct_answer: q.correctAnswers
       }))
@@ -171,7 +172,15 @@ const CreateQuiz = () => {
 
             <div className="input-group">
               <label><Clock size={16} /> Temps limite (en secondes)</label>
-              <input type="number" defaultValue={q.time} />
+              <input 
+                type="number"
+                value={q.time ?? 30} 
+                onChange={(e) => {
+                  const newQuestions = [...questions];
+                  newQuestions[index].time = parseInt(e.target.value) || 0; 
+                  setQuestions(newQuestions);
+                }} 
+              />
               <p className="helper-text">Temps accordé aux étudiants pour répondre à cette question</p>
             </div>
 

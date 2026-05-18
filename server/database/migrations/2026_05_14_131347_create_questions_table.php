@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->foreignId('quiz_id')->constrained()->onDelete('cascade'); 
         $table->text('question_text'); 
+        $table->integer('time')->default(30); 
         $table->json('options');       
         $table->string('correct_answer'); 
         $table->timestamps();
