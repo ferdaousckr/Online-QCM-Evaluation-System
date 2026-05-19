@@ -8,9 +8,9 @@ Projet de fin de semestre - S6 Génie Informatique (FP Taroudant).
 * Encadré par : **M. Hamza ELKINA**
 
 ## 🚀 Technologies utilisées
-* **Frontend :** React.js, Tailwind CSS, Lucide-react
+* **Frontend :** React.js, Tailwind CSS
 * **Backend :** Laravel / PHP
-* **Outils :** Docker, Git, GitHub
+* **Outils :**  Git, GitHub
 
 ## 🛠 Installation et Lancement
 1. `git clone https://github.com/ferdaousckr/Online-QCM-Evaluation-System.git`
