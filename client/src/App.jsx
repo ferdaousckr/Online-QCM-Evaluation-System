@@ -3,9 +3,8 @@ import LoginView from './components/LoginView';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import CreateQuiz from './components/CreateQuiz';
 import QuizPreview from './components/QuizPreview';
-import StudentDashboard from './components/StudentDashboard'; 
-import QuizView from './components/QuizView'; 
-
+import StudentDashboard from './components/StudentDashboard';
+import StudentQuiz from './components/StudentQuiz';
 
 function App() {
   return (
@@ -20,12 +19,12 @@ function App() {
         <Route path="/create-quiz" element={<CreateQuiz />} />
         <Route path="/edit-quiz/:id" element={<CreateQuiz />} />
       
-        <Route path="/quiz/:id" element={<QuizPreview />} />
-      
+        <Route path="/quiz-preview/:id" element={<QuizPreview />} />
 
         <Route path="/student-dashboard" element={<StudentDashboard />} />
-        <Route path="/student/quiz/:id" element={<QuizView />} />
 
+        {/* Route dynamique unique pour la session de l'étudiant */}
+        <Route path="/student/quiz/:code" element={<StudentQuiz />} />
       </Routes>
     </BrowserRouter>
   );

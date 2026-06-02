@@ -24,26 +24,22 @@ const mockQuizzes = [
   }
 ];
 
-const MOCK_QUIZZES_BY_CODE = {
-  'ABC123': { id: 1, title: 'Quiz de Mathématiques' },
-  'XYZ789': { id: 2, title: 'Quiz de Physique' },
-};
-
 export default function StudentDashboard() {
   const navigate = useNavigate();
   const [quizCode, setQuizCode] = useState('');
 
   const handleJoinQuiz = (e) => {
-  e.preventDefault();
-  const upperCode = quizCode.toUpperCase().trim();
-  
-  if (!upperCode) {
-    alert("Veuillez entrer un code.");
-    return;
-  }
-  
-  navigate(`/student/quiz/${upperCode}`);
-};
+    e.preventDefault();
+    const upperCode = quizCode.toUpperCase().trim();
+    
+    if (!upperCode) {
+      alert("Veuillez entrer un code.");
+      return;
+    }
+    
+    // CORRECTION : Utilisation des backticks (``) pour l'URL dynamique
+    navigate(`/student/quiz/${upperCode}`);
+  };
 
   const getStatusBadge = (quiz) => {
     switch (quiz.status) {
@@ -92,6 +88,8 @@ export default function StudentDashboard() {
       <main className="max-w-6xl mx-auto px-6 py-8">
         <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm mb-8">
           <h2 className="text-lg font-semibold mb-6 text-center">Rejoindre un nouveau Quiz</h2>
+          
+          {/* Le onSubmit intercepte le clic sur le bouton ET la touche "Entrée" du clavier */}
           <form onSubmit={handleJoinQuiz} className="max-w-2xl mx-auto">
             <div className="flex items-end gap-4">
               <div className="flex-1">
@@ -102,6 +100,7 @@ export default function StudentDashboard() {
                   id="quiz-code-main"
                   type="text"
                   value={quizCode}
+                  // Forcer la valeur en majuscule à la saisie pour éviter les erreurs d'inattention
                   onChange={(e) => setQuizCode(e.target.value.toUpperCase())}
                   placeholder="ABC123"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase font-mono text-lg tracking-widest text-center"
