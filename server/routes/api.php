@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
@@ -65,3 +66,10 @@ Route::delete('/quizzes/{id}', [QuizController::class, 'destroy']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+=======
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\StudentQuizController;
+
+Route::post('/student/quiz/submit/{id}', [StudentQuizController::class, 'submitQuiz']);
+Route::get('/student/history', [StudentQuizController::class, 'getStudentHistory']);
+>>>>>>> 8661877 (fix(backend): add title column to results migration and setup api routes)
