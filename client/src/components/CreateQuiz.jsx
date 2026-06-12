@@ -3,6 +3,7 @@ import { ArrowLeft, Plus, Clock, Trash2 } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './CreateQuiz.css';
+import Swal from 'sweetalert2';
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
@@ -91,7 +92,16 @@ const CreateQuiz = () => {
       }
 
       if (response.status === 200 || response.status === 201) {
-        alert(id ? "Quiz mis à jour avec succès !" : "Félicitations ! Ton quiz est en ligne.");
+        Swal.fire({
+          title: 'Félicitations !',
+          text: 'Ton quiz est en ligne et prêt pour vos étudiants.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#3085d6', 
+          customClass: {
+            popup: 'my-custom-swal-popup', 
+          }
+        });
         navigate('/prof-dashboard');
       }
     } catch (error) {
