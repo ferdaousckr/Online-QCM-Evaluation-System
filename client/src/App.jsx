@@ -4,7 +4,7 @@ import ProfessorDashboard from './components/ProfessorDashboard';
 import CreateQuiz from './components/CreateQuiz';
 import QuizPreview from './components/QuizPreview';
 import StudentDashboard from './components/StudentDashboard';
-import StudentQuiz from './components/StudentQuiz';
+import QuizView from './components/QuizView';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path="/student-dashboard" element={<StudentDashboard />} />
 
         {/* Route dynamique unique pour la session de l'étudiant */}
-        <Route path="/student/quiz/:code" element={<StudentQuiz />} />
+        <Route path="/student/quiz/:code" element={<QuizView />} />
       </Routes>
     </BrowserRouter>
   );
