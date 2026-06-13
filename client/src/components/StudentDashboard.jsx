@@ -1,72 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, CheckCircle, XCircle, LogOut, Play } from 'lucide-react';
 
-const mockQuizzes = [
-  {
-    id: 1,
-    title: 'Quiz de Mathématiques',
-    description: 'Algèbre et géométrie',
-    duration: 30,
-    questionsCount: 15,
-    status: 'available',
-    deadline: '2026-04-10',
-  },
-  {
-    id: 2,
-    title: 'Quiz de Physique',
-    description: 'Mécanique et thermodynamique',
-    duration: 45,
-    questionsCount: 20,
-    status: 'completed',
-    score: 85,
-    deadline: '2026-03-28',
-  }
-];
+const API_BASE = 'http://127.0.0.1:8000/api';
 
 export default function StudentDashboard() {
   const navigate = useNavigate();
   const [quizCode, setQuizCode] = useState('');
+  const [error, setError] = useState('');
+  const [history, setHistory] = useState([]);
+  const [loadingHistory, setLoadingHistory] = useState(true);
+
+  // Fetch student history from results table
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id') ?? 1;
+    fetch(`${API_BASE}/student/history?user_id=${userId}`)
+      .then(res => res.json())
+      .then(data => setHistory(Array.isArray(data) ? data : []))
+      .catch(() => setHistory([]))
+      .finally(() => setLoadingHistory(false));
+  }, []);
 
   const handleJoinQuiz = (e) => {
     e.preventDefault();
     const upperCode = quizCode.toUpperCase().trim();
-    
+
     if (!upperCode) {
-      alert("Veuillez entrer un code.");
+      setError('Veuillez entrer un code.');
       return;
     }
-    
-    // CORRECTION : Utilisation des backticks (``) pour l'URL dynamique
+    if (upperCode.length < 4) {
+      setError('Le code doit contenir au moins 4 caractères.');
+      return;
+    }
+
+    setError('');
     navigate(`/student/quiz/${upperCode}`);
   };
 
   const getStatusBadge = (quiz) => {
-    switch (quiz.status) {
-      case 'available':
-        return (
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700">
-            <Play className="size-4 mr-1" />
-            À faire
-          </span>
-        );
-      case 'completed':
-        return (
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700">
-            <CheckCircle className="size-4 mr-1" />
-            Terminé ({quiz.score}%)
-          </span>
-        );
-      case 'expired':
-        return (
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-700">
-            <XCircle className="size-4 mr-1" />
-            Expiré
-          </span>
-        );
-      default:
-        return null;
-    }
+    return (
+      <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700">
+        <CheckCircle className="size-4 mr-1" />
+        {quiz.score_sur_20}/20
+      </span>
+    );
   };
 
   return (
@@ -74,7 +52,6 @@ export default function StudentDashboard() {
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
           <h1 className="text-xl font-bold text-gray-800">Tableau de Bord Étudiant</h1>
-          
           <button
             onClick={() => navigate('/')}
             className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
@@ -88,8 +65,6 @@ export default function StudentDashboard() {
       <main className="max-w-6xl mx-auto px-6 py-8">
         <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm mb-8">
           <h2 className="text-lg font-semibold mb-6 text-center">Rejoindre un nouveau Quiz</h2>
-          
-          {/* Le onSubmit intercepte le clic sur le bouton ET la touche "Entrée" du clavier */}
           <form onSubmit={handleJoinQuiz} className="max-w-2xl mx-auto">
             <div className="flex items-end gap-4">
               <div className="flex-1">
@@ -100,12 +75,15 @@ export default function StudentDashboard() {
                   id="quiz-code-main"
                   type="text"
                   value={quizCode}
-                  // Forcer la valeur en majuscule à la saisie pour éviter les erreurs d'inattention
-                  onChange={(e) => setQuizCode(e.target.value.toUpperCase())}
+                  onChange={(e) => {
+                    setQuizCode(e.target.value.toUpperCase());
+                    setError('');
+                  }}
                   placeholder="ABC123"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase font-mono text-lg tracking-widest text-center"
                   maxLength={6}
                 />
+                {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
               </div>
               <button
                 type="submit"
@@ -123,26 +101,31 @@ export default function StudentDashboard() {
         </div>
 
         <div className="grid gap-4">
-          {mockQuizzes.map((quiz) => (
-            <div key={quiz.id} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900">{quiz.title}</h3>
-                  <p className="text-gray-600">{quiz.description}</p>
-                </div>
-                {getStatusBadge(quiz)}
-              </div>
-
-              <div className="flex items-center gap-6 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <Clock className="size-4" />
-                  {quiz.duration} min
-                </div>
-                <div>{quiz.questionsCount} questions</div>
-                {quiz.deadline && <div>Limite: {new Date(quiz.deadline).toLocaleDateString('fr-FR')}</div>}
-              </div>
+          {loadingHistory ? (
+            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-400">
+              Chargement...
             </div>
-          ))}
+          ) : history.length === 0 ? (
+            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-400">
+              Aucun quiz complété pour le moment.
+            </div>
+          ) : (
+            history.map((quiz) => (
+              <div key={quiz.id} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">{quiz.title}</h3>
+                    <p className="text-gray-600">{quiz.description}</p>
+                  </div>
+                  {getStatusBadge(quiz)}
+                </div>
+                <div className="flex items-center gap-6 text-sm text-gray-600">
+                  <div>{quiz.correct_answers}/{quiz.total_questions} réponses correctes</div>
+                  <div>{quiz.date}</div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </main>
     </div>
