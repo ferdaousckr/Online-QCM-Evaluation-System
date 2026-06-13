@@ -5,13 +5,10 @@
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
+    
     "require": {
         "php": "^8.3",
-
-        "laravel/framework": "^13.0",
-
         "laravel/framework": "^13.7",
-
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0"
     },

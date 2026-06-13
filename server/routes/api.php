@@ -1,10 +1,14 @@
 <?php
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 use Illuminate\Http\Request;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\AuthController;
 
+<<<<<<< Updated upstream
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,51 +18,30 @@ use App\Http\Controllers\AuthController;
 
 // ROUTES D'AUTHENTIFICATION (Si nécessaires)
 
+=======
+// ==========================================
+// ROUTES D'AUTHENTIFICATION
+// ==========================================
+>>>>>>> Stashed changes
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login',    [AuthController::class, 'login']);
 
-
+<<<<<<< Updated upstream
 
 // ROUTES DU SYSTEME DE GESTION DES QCM
 
+=======
+// ==========================================
+// ROUTES ÉTUDIANT
+// ==========================================
+>>>>>>> Stashed changes
 
-/**
- * ⚠️ PRIORITÉ ABSOLUE : La route "join" pour l'étudiant.
- * Elle est placée TOUT EN HAUT pour éviter que Laravel ne confonde le {code} (Ex: WS7YFI) 
- * avec l'ID numérique d'un quiz ({id}).
- */
-Route::get('/student/quiz/{code}', [QuizController::class, 'joinQuiz']);
+// PRIORITÉ ABSOLUE : placée avant /quizzes/{id} pour éviter la confusion avec un ID numérique
+Route::get('/student/quiz/{code}',        [QuizController::class, 'joinQuiz']);
+Route::post('/student/quiz/{code}/submit',[QuizController::class, 'submitQuiz']);
+Route::get('/student/history',           [QuizController::class, 'getStudentHistory']);
 
-/**
- * Route pour créer un quiz. 
- * Alignée sur ton test réussi : POST http://127.0.0.1:8000/api/quizzes
- */
-Route::post('/quizzes', [QuizController::class, 'store']);
-
-/**
- * Récupérer la liste complète de tous les quiz
- */
-Route::get('/quizzes', [QuizController::class, 'index']);
-
-/**
- * Récupérer un quiz spécifique par son ID numérique (Ex: /api/quizzes/5)
- */
-Route::get('/quizzes/{id}', [QuizController::class, 'show']);
-
-Route::get('/quizzes/{id}/scores', [QuizController::class, 'getQuizScores']);
-Route::post('/student/quiz/{id}/submit', [QuizController::class, 'submitQuiz']);
-
-/**
- * Mettre à jour un quiz existant (Modification)
- */
-Route::put('/quizzes/{id}', [QuizController::class, 'update']);
-
-/**
- * Supprimer un quiz de la base de données
- */
-Route::delete('/quizzes/{id}', [QuizController::class, 'destroy']);
-
-
+<<<<<<< Updated upstream
 // ROUTE PAR DÉFAUT (AUTHENTIFICATION LARAVEL)
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -71,3 +54,21 @@ use App\Http\Controllers\API\StudentQuizController;
 Route::post('/student/quiz/submit/{id}', [StudentQuizController::class, 'submitQuiz']);
 Route::get('/student/history', [StudentQuizController::class, 'getStudentHistory']);
 
+=======
+// ==========================================
+// ROUTES PROFESSEUR (CRUD QUIZ)
+// ==========================================
+Route::get   ('/quizzes',          [QuizController::class, 'index']);
+Route::post  ('/quizzes',          [QuizController::class, 'store']);
+Route::get   ('/quizzes/{id}',     [QuizController::class, 'show']);
+Route::put   ('/quizzes/{id}',     [QuizController::class, 'update']);
+Route::delete('/quizzes/{id}',     [QuizController::class, 'destroy']);
+Route::get   ('/quizzes/{id}/scores', [QuizController::class, 'getQuizScores']);
+
+// ==========================================
+// ROUTE SANCTUM PAR DÉFAUT
+// ==========================================
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+>>>>>>> Stashed changes
